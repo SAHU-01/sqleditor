@@ -1,10 +1,10 @@
 import React from "react";
-import SQLEditor from "./sqlditor/SqlEditor";
+import SqlCompiler from "./components/SQLCompiler";
 function App() {
   return (
     <>
       <div className="m-5 text-red-300">
-        <SQLEditor />
+        <SqlCompiler />
       </div>
     </>
   );

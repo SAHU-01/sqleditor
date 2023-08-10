@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/theme-dracula";
 import "ace-builds/src-noconflict/mode-sql";
 import "ace-builds/src-noconflict/ext-language_tools";
 
 function SQLEditor() {
-  const [sqlCode, setSqlCode] = React.useState("");
+  const [sqlCode, setSqlCode] = useState("");
 
   const handleCodeChange = (newCode) => {
     setSqlCode(newCode);
