@@ -41,7 +41,7 @@ const OutputSection = ({ tableData }) => {
   return (
     <div className="text-left bg-[#282a36]  h-[50vh] overflow-auto">
       <table className="w-full  border border-[#44475a] border-collapse">
-        <thead className="text-[#f8f8f2] mb-5 bg-[#44475a]">
+        <thead className="text-[#ffb86c] mb-5 bg-[#44475a]">
           <tr>
             {Object.keys(tableData[0]).map((columnName, index) => (
               <th key={index} className="border-b-2 border-[#44475a] px-4 py-2">

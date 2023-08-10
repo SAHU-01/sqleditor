@@ -3,6 +3,7 @@ import SQLEditor from "./sqlditor/SqlEditor";
 import OutputSection from "./sqlditor/OutputSection";
 import Navbar from "./Navbar";
 import axios from "axios";
+import Tabs from "./Tabs";
 
 const SqlCompiler = () => {
   const [tableData, setTableData] = useState(null);
@@ -45,6 +46,7 @@ const SqlCompiler = () => {
   return (
     <div className="">
       <Navbar onImportClick={handleImportClick} onRunClick={handleRunQuery} />
+      <Tabs />
       {isLoading ? (
         <div className="font-bold text-2xl text-[#ff5555] h-[45vh] flex items-center justify-center">
           Loading...
