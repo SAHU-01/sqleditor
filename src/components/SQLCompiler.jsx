@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SQLEditor from "./sqlditor/SqlEditor";
 import OutputSection from "./sqlditor/OutputSection";
 import Navbar from "./Navbar";
 import axios from "axios";

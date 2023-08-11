@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SQLEditor from "./sqlditor/SqlEditor";
+import { saveToLocalStorage } from "../utils/storageMockApi";
+import { useDebounce } from "../hooks/useDebounce";
 
-const Tabs = ({ onImportClick, onRunClick }) => {
+const Tabs = () => {
   const [tabs, setTabs] = useState([{ name: "Tab 1", content: "" }]);
   const [activeTab, setActiveTab] = useState(0);
 
@@ -39,6 +41,17 @@ const Tabs = ({ onImportClick, onRunClick }) => {
     setTabs(updatedTabs);
   };
 
+  // Create a debounced value for the tab content
+  const debouncedContent = useDebounce(tabs[activeTab]?.content, 1000);
+
+  useEffect(() => {
+    if (debouncedContent !== undefined) {
+      const storageKey = `tabContent_${activeTab}`;
+      saveToLocalStorage(storageKey, debouncedContent);
+      //console.log(`Stored to local storage (${storageKey}):`, debouncedContent);
+    }
+  }, [debouncedContent, activeTab]);
+
   return (
     <div className="pt-px">
       <div className="flex flex-row justify-between px-2 h-12">
@@ -50,7 +63,7 @@ const Tabs = ({ onImportClick, onRunClick }) => {
                 key={index}
                 className={`${
                   activeTab === index ? "bg-[#44475a]" : "bg-black"
-                } text-white px-2 py-3 cursor-pointer whitespace-nowrap`}
+                } text-white px-3 py-3 cursor-pointer whitespace-nowrap`}
                 onClick={() => handleTabClick(index)}
               >
                 {tab.name}
