@@ -60,7 +60,7 @@ const Tabs = () => {
 
   return (
     <div className="pt-px">
-      <div className="flex flex-row justify-between px-2 h-12">
+      <div className="flex flex-row justify-between px-1 h-12">
         <div className="flex justify-end items-center  overflow-x-auto">
           {/* Use overflow-x-auto to enable horizontal scrolling */}
           <div className="flex space-x-2 overflow-x-scroll">

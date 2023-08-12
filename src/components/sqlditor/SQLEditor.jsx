@@ -6,13 +6,13 @@ import "ace-builds/src-noconflict/ext-language_tools";
 
 const SQLEditor = ({ value, onChange }) => {
   return (
-    <div className="m-2 mt-0">
+    <div className=" border-b-2 border-[#44475a] mt-0">
       <AceEditor
         mode="sql"
         theme="dracula"
         fontSize={14}
         width="100%"
-        height="400px"
+        height="312px"
         showPrintMargin={false}
         value={value}
         enableBasicAutocompletion={true}

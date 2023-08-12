@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import OutputSection from "./sqlditor/OutputSection";
+import OutputSection from "./results/OutputSection";
+import ResultComponent from "./ExecutedResult";
 import Navbar from "./Navbar";
 import axios from "axios";
 import Tabs from "./sqlditor/Tabs";
@@ -102,16 +103,10 @@ const SqlCompiler = () => {
   };
 
   return (
-    <div className="col-span-3">
+    <div className="h-screen">
       <Navbar onImportClick={handleImportClick} onRunClick={handleRunQuery} />
       <Tabs />
-      {isLoading ? (
-        <div className="font-bold text-2xl text-[#ffb86c] h-[45vh] flex items-center justify-center">
-          Loading...
-        </div> // Display loader while loading
-      ) : (
-        <OutputSection tableData={tableData} />
-      )}
+      <ResultComponent tableData={tableData} isLoading={isLoading} />
     </div>
   );
 };

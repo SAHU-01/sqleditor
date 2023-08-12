@@ -5,12 +5,14 @@ import ExecutedQueries from "../components/ExecutedQueries";
 
 const IDE = () => {
   return (
-    <div className="grid grid-cols-4">
-      <div className="grid grid-rows-2 h-screen gap-2">
+    <div className="grid grid-cols-4 bg-black">
+      <div className="grid grid-rows-2 h-screen ">
         <Explore />
         <ExecutedQueries />
       </div>
-      <SqlCompiler />
+      <div className="col-span-3">
+        <SqlCompiler />
+      </div>
     </div>
   );
 };

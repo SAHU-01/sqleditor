@@ -39,7 +39,7 @@ const OutputSection = ({ tableData }) => {
   }
 
   return (
-    <div className="text-left bg-[#282a36]  h-[50vh] overflow-auto">
+    <div className="text-left bg-[#282a36] h-[40vh] overflow-auto border border-[#44475a]">
       <table className="w-full  border border-[#44475a] border-collapse">
         <thead className="text-[#ffb86c] mb-5 bg-[#44475a]">
           <tr>
