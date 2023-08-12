@@ -9,11 +9,14 @@ const Tabs = () => {
   const [tabs, setTabs] = useState(
     getFromLocalStorage("tabs") || [{ name: "Tab 1", content: "" }]
   );
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(
+    parseInt(getFromLocalStorage("activeTab")) || 0
+  ); // Get active tab index from local storage
 
   useEffect(() => {
     saveToLocalStorage("tabs", tabs);
-  }, [tabs]);
+    saveToLocalStorage("activeTab", activeTab); // Save active tab index to local storage
+  }, [tabs, activeTab]);
 
   const handleTabClick = (index) => {
     setActiveTab(index);

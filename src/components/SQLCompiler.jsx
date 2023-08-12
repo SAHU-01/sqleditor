@@ -1,25 +1,75 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import OutputSection from "./sqlditor/OutputSection";
 import Navbar from "./Navbar";
 import axios from "axios";
 import Tabs from "./sqlditor/Tabs";
+import {
+  getFromLocalStorage,
+  saveToLocalStorage,
+} from "../utils/storageMockApi";
 
 const SqlCompiler = () => {
   const [tableData, setTableData] = useState(null);
   const [isLoading, setIsLoading] = useState(false); // Add a loading state
+  const [activeTabIndex, setActiveTabIndex] = useState(
+    parseInt(getFromLocalStorage("activeTab")) || 0
+  ); // Get active tab index from local storage
+
+  // Assuming you have a mapping of queries to API URLs
+  const queryToApiMapping = {
+    "select * from users": "https://apigenerator.dronahq.com/api/3AL3EswV/data",
+    "select * from products":
+      "https://apigenerator.dronahq.com/api/Z8TmawRp/products",
+    // Add more query to API mappings as needed
+  };
+
+  const defaultApiURL = "https://apigenerator.dronahq.com/api/3AL3EswV/data";
+
+  // Function to match a query with an API URL
+  const matchQueryWithAPI = (query) => {
+    const matchedApiURL = queryToApiMapping[query];
+    if (matchedApiURL) {
+      return matchedApiURL;
+    } else {
+      return defaultApiURL; // Use the default API when no match is found
+    }
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const activeTabFromLocalStorage =
+        parseInt(getFromLocalStorage("activeTab")) || 0;
+      setActiveTabIndex(activeTabFromLocalStorage);
+    }, 1000); // Poll every 1 second
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   const handleRunQuery = async () => {
-    setIsLoading(true); // Set loading to true before making the request
-    try {
-      const response = await axios.get(
-        `https://apigenerator.dronahq.com/api/3AL3EswV/data`
-      );
-      setTableData(response.data);
-    } catch (error) {
-      console.log("compiler");
-      console.error(error);
-    } finally {
-      setIsLoading(false); // Set loading back to false after request completion
+    const tabs = getFromLocalStorage("tabs") || [];
+    const activeTabContent = tabs[activeTabIndex].content.trim().toLowerCase();
+
+    if (activeTabContent !== "") {
+      const query = activeTabContent;
+      setIsLoading(true);
+      try {
+        const apiURL = matchQueryWithAPI(query);
+        const response = await axios.get(apiURL);
+        setTableData(response.data);
+
+        // Save the executed query in local storage under past run queries
+        const pastQueries = getFromLocalStorage("pastQueries") || [];
+        pastQueries.push(query);
+        saveToLocalStorage("pastQueries", pastQueries);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      console.log("Query is empty");
     }
   };
 
