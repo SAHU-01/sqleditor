@@ -70,7 +70,7 @@ const Explorer = () => {
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
-            <span className="mr-3">
+            <span className="mr-3 text-[#ffb86c]">
               <BsFiletypeSql />
             </span>
             <h2 className="text-sm">{tab.name}</h2>

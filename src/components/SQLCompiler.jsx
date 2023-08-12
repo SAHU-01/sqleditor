@@ -53,15 +53,24 @@ const SqlCompiler = () => {
 
     if (activeTabContent !== "") {
       const query = activeTabContent;
+
+      // Check if the query has already been executed
+      const pastQueries = getFromLocalStorage("pastQueries") || [];
+      const queryIndex = pastQueries.findIndex((q) => q === query);
+
+      if (queryIndex !== -1) {
+        // If query has been executed before, move it to the top of the list
+        pastQueries.splice(queryIndex, 1);
+      }
+
       setIsLoading(true);
       try {
         const apiURL = matchQueryWithAPI(query);
         const response = await axios.get(apiURL);
         setTableData(response.data);
 
-        // Save the executed query in local storage under past run queries
-        const pastQueries = getFromLocalStorage("pastQueries") || [];
-        pastQueries.push(query);
+        // Add the executed query at the top of the list
+        pastQueries.unshift(query);
         saveToLocalStorage("pastQueries", pastQueries);
       } catch (error) {
         console.error(error);
@@ -97,7 +106,7 @@ const SqlCompiler = () => {
       <Navbar onImportClick={handleImportClick} onRunClick={handleRunQuery} />
       <Tabs />
       {isLoading ? (
-        <div className="font-bold text-2xl text-[#ff5555] h-[45vh] flex items-center justify-center">
+        <div className="font-bold text-2xl text-[#ffb86c] h-[45vh] flex items-center justify-center">
           Loading...
         </div> // Display loader while loading
       ) : (
