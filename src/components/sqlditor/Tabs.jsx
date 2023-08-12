@@ -43,12 +43,6 @@ const Tabs = () => {
     setTabs(updatedTabs);
   };
 
-  //   const handleEditorChange = (index, newContent) => {
-  //     const updatedTabs = [...tabs];
-  //     updatedTabs[index].content = newContent;
-  //     setTabs(updatedTabs);
-  //   };
-
   const handleEditorChange = (index, newContent) => {
     const updatedTabs = [...tabs];
     updatedTabs[index].content = newContent;

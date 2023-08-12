@@ -8,3 +8,8 @@ export const getFromLocalStorage = (key) => {
   const data = localStorage.getItem(key);
   return data ? JSON.parse(data) : null;
 };
+
+// Function to simulate removing data from local storage
+export const removeFromLocalStorage = (key) => {
+  localStorage.removeItem(key);
+};

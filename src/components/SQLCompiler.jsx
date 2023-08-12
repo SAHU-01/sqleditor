@@ -43,7 +43,7 @@ const SqlCompiler = () => {
   };
 
   return (
-    <div className="">
+    <div className="col-span-3">
       <Navbar onImportClick={handleImportClick} onRunClick={handleRunQuery} />
       <Tabs />
       {isLoading ? (
