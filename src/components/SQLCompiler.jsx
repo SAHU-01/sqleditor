@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import OutputSection from "./sqlditor/OutputSection";
 import Navbar from "./Navbar";
 import axios from "axios";
-import Tabs from "./Tabs";
+import Tabs from "./sqlditor/Tabs";
 
 const SqlCompiler = () => {
   const [tableData, setTableData] = useState(null);

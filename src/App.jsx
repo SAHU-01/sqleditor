@@ -1,9 +1,9 @@
 import React from "react";
-import SqlCompiler from "./components/SQLCompiler";
+import IDE from "./pages/IDE";
 function App() {
   return (
-    <div className="bg-black">
-      <SqlCompiler />
+    <div className="">
+      <IDE />
     </div>
   );
 }
