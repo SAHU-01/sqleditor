@@ -1,36 +1,3 @@
-// import React from "react";
-
-// const OutputSection = ({ tableData }) => {
-//   if (!tableData) {
-//     return null;
-//   }
-
-//   return (
-//     <div>
-//       <table>
-//         <thead>
-//           <tr>
-//             {tableData.columns.map((column, index) => (
-//               <th key={index}>{column}</th>
-//             ))}
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {tableData.rows.map((row, rowIndex) => (
-//             <tr key={rowIndex}>
-//               {row.map((cell, cellIndex) => (
-//                 <td key={cellIndex}>{cell}</td>
-//               ))}
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default OutputSection;
-
 import React from "react";
 
 const OutputSection = ({ tableData }) => {

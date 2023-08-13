@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import OutputSection from "./results/OutputSection";
 import ResultComponent from "./ExecutedResult";
 import Navbar from "./Navbar";
 import axios from "axios";
