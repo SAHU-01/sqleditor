@@ -10,7 +10,7 @@ const ResultComponent = ({ tableData, isLoading }) => {
   };
 
   return (
-    <div className=" bg-[#282a36] rounded p-4 shadow-md ">
+    <div className=" bg-[#282a36] rounded p-4 shadow-md h-[50vh]">
       <div className="border-b mb-4 border-[#6272a4]">
         <TabButton
           tabName="tab1"

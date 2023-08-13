@@ -58,7 +58,7 @@ const Explorer = () => {
   }, []);
 
   return (
-    <div className="bg-[#282a36] border-r-2 border-b-2 border-[#44475a]">
+    <div className="bg-[#282a36] border-r-2 border-b-2 border-[#44475a] flex-1">
       <h2 className="bg-[#44475a] text-white font-semibold p-2 text-sm">
         FILE EXPLORER
       </h2>
