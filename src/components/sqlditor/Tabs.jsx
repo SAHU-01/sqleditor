@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SQLEditor from "./SqlEditor";
+import SQLEditor from "./SQLEditor";
 import {
   saveToLocalStorage,
   getFromLocalStorage,
