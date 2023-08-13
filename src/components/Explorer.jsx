@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   getFromLocalStorage,
   removeFromLocalStorage,
+  saveToLocalStorage,
 } from "../utils/storageMockApi";
 import { BsFiletypeSql, BsTrash } from "react-icons/bs";
 
@@ -38,6 +39,13 @@ const Explorer = () => {
     try {
       removeFromLocalStorage(tabKey);
       console.log(`Tab removed from local storage: ${tabKey}`);
+
+      // Remove tab entry from local storage's 'tabs' key
+      const tabsFromStorage = getFromLocalStorage("tabs") || {};
+      delete tabsFromStorage[tabNumber];
+      saveToLocalStorage("tabs", tabsFromStorage);
+
+      console.log(`Tab removed from 'tabs' key in local storage: ${tabKey}`);
     } catch (error) {
       console.error(`Error removing tab from local storage: ${tabKey}`, error);
     }

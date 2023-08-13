@@ -40,7 +40,7 @@ const ExecutedQueries = () => {
           ))}
         </ul>
       ) : (
-        <p className="text-white">No past executed queries yet.</p>
+        <p className="text-[#44475a] p-2">No past executed queries yet.</p>
       )}
     </div>
   );

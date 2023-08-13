@@ -103,7 +103,7 @@ const SqlCompiler = () => {
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-screen flex flex-col">
       <Navbar onImportClick={handleImportClick} onRunClick={handleRunQuery} />
       <Tabs />
       <ResultComponent tableData={tableData} isLoading={isLoading} />

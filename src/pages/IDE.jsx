@@ -12,7 +12,7 @@ const IDE = () => {
   };
 
   return (
-    <div className="grid sm:grid-cols-8  md:grid-cols-4 bg-black">
+    <div className="grid sm:grid-cols-8  md:grid-cols-4 bg-[#282a36]">
       {/* Sidebar */}
       <div
         className={`md:hidden  ${

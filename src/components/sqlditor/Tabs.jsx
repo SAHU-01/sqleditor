@@ -4,6 +4,7 @@ import {
   saveToLocalStorage,
   getFromLocalStorage,
 } from "../../utils/storageMockApi";
+import { AiFillCloseCircle, AiFillFileAdd } from "react-icons/ai";
 
 const Tabs = () => {
   const [tabs, setTabs] = useState(
@@ -12,20 +13,42 @@ const Tabs = () => {
   const [activeTab, setActiveTab] = useState(
     parseInt(getFromLocalStorage("activeTab")) || 0
   ); // Get active tab index from local storage
+  const [lastTabNumber, setLastTabNumber] = useState(0);
 
   useEffect(() => {
     saveToLocalStorage("tabs", tabs);
     saveToLocalStorage("activeTab", activeTab); // Save active tab index to local storage
   }, [tabs, activeTab]);
 
+  useEffect(() => {
+    // Find the highest tab number from existing tabs
+    let maxTabNumber = 0;
+    tabs.forEach((tab) => {
+      const tabNumber = parseInt(tab.name.split(" ")[1]);
+      if (!isNaN(tabNumber) && tabNumber > maxTabNumber) {
+        maxTabNumber = tabNumber;
+      }
+    });
+
+    setLastTabNumber(maxTabNumber);
+  }, [tabs]);
+
   const handleTabClick = (index) => {
     setActiveTab(index);
   };
 
+  // const handleAddTab = () => {
+  //   const newTab = { name: `Tab ${tabs.length + 1}`, content: "" };
+  //   setTabs([...tabs, newTab]);
+  //   setActiveTab(tabs.length); // Activate the newly added tab
+  // };
+
   const handleAddTab = () => {
-    const newTab = { name: `Tab ${tabs.length + 1}`, content: "" };
+    const newTabNumber = lastTabNumber + 1;
+    const newTab = { name: `Tab ${newTabNumber}`, content: "" };
     setTabs([...tabs, newTab]);
     setActiveTab(tabs.length); // Activate the newly added tab
+    setLastTabNumber(newTabNumber);
   };
 
   const handleRemoveTab = (index) => {
@@ -39,11 +62,11 @@ const Tabs = () => {
     }
 
     // Update tab names to reflect new positions
-    const updatedTabs = newTabs.map((tab, i) => ({
-      ...tab,
-      name: `Tab ${i + 1}`,
-    }));
-    setTabs(updatedTabs);
+    // const updatedTabs = newTabs.map((tab, i) => ({
+    //   ...tab,
+    //   name: `Tab ${i + 1}`,
+    // }));
+    // setTabs(updatedTabs);
   };
 
   const handleEditorChange = (index, newContent) => {
@@ -59,7 +82,7 @@ const Tabs = () => {
   };
 
   return (
-    <div className="pt-px">
+    <div className="pt-px flex-1">
       <div className="flex flex-row justify-between px-1 h-12">
         <div className="flex justify-end items-center  overflow-x-auto">
           {/* Use overflow-x-auto to enable horizontal scrolling */}
@@ -69,7 +92,7 @@ const Tabs = () => {
                 key={index}
                 className={`${
                   activeTab === index ? "bg-[#44475a]" : "bg-black"
-                } text-white px-2 py-3 cursor-pointer whitespace-nowrap`}
+                } text-white flex items-center px-2 py-3 cursor-pointer whitespace-nowrap`}
                 onClick={() => handleTabClick(index)}
               >
                 {tab.name}
@@ -78,7 +101,7 @@ const Tabs = () => {
                     className="ml-6 px-2 text-xs cursor-pointer"
                     onClick={() => handleRemoveTab(index)}
                   >
-                    ✕
+                    <AiFillCloseCircle className="text-base" />
                   </span>
                 )}
               </div>
@@ -88,7 +111,7 @@ const Tabs = () => {
             className="text-2xl text-white px-4 py-2 rounded"
             onClick={handleAddTab}
           >
-            +
+            <AiFillFileAdd className="text-lg" />
           </button>
         </div>
       </div>
@@ -101,6 +124,29 @@ const Tabs = () => {
             />
           </div>
         ))}
+
+        {/* {tabs.map((tab, index) => {
+          const tabToDelete = tabs[index];
+          const tabNumber = parseInt(tabToDelete.name.match(/\d+/)) - 1;
+          const tabObject = getFromLocalStorage("tabs")[tabNumber];
+          if (tabObject.content !== null) {
+            return (
+              <div
+                key={index}
+                className={`${activeTab === index ? "" : "hidden"}`}
+              >
+                <SQLEditor
+                  value={tab.content}
+                  onChange={(newContent) =>
+                    handleEditorChange(index, newContent)
+                  }
+                />
+              </div>
+            );
+          } else {
+            return null; // Skip rendering for deleted tabs
+          }
+        })} */}
       </div>
     </div>
   );
