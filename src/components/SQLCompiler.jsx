@@ -17,13 +17,13 @@ const SqlCompiler = () => {
 
   // Assuming you have a mapping of queries to API URLs
   const queryToApiMapping = {
-    "select * from users": "https://apigenerator.dronahq.com/api/3AL3EswV/data",
+    "select * from users": "https://apigenerator.dronahq.com/api/85g-RmAl/user",
     "select * from products":
-      "https://apigenerator.dronahq.com/api/Z8TmawRp/products",
+      "https://apigenerator.dronahq.com/api/LVX2C9m_/products",
     // Add more query to API mappings as needed
   };
 
-  const defaultApiURL = "https://apigenerator.dronahq.com/api/3AL3EswV/data";
+  const defaultApiURL = "https://apigenerator.dronahq.com/api/85g-RmAl/user";
 
   // Function to match a query with an API URL
   const matchQueryWithAPI = (query) => {
